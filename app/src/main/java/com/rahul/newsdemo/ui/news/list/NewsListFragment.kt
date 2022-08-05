@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.rahul.newsdemo.R
 import com.rahul.newsdemo.data.local.EventObserver
 import com.rahul.newsdemo.databinding.FragmentNewsListBinding
 import com.rahul.newsdemo.extensions.gone
@@ -41,7 +40,6 @@ class NewsListFragment : Fragment() {
     }
 
     private fun setupUI() {
-        binding.toolBar.setTitle(R.string.app_name)
         setupRecycler()
     }
 
