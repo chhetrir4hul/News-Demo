@@ -1,23 +1,31 @@
 package com.rahul.newsdemo.data.remote
 
-data class TopHeadlineResponse(
-    val articles: List<Article?>?,
+import com.rahul.newsdemo.data.local.Article
+import com.rahul.newsdemo.data.local.TopHeadline
+
+data class ApiTopHeadline(
+    val articles: List<ApiArticle?>?,
     val status: String?,
     val totalResults: Int?
-)
+) {
+    fun toTopHeadline(): TopHeadline {
+        val articleList =
+            articles.orEmpty().filterNotNull().mapNotNull { apiArticle -> apiArticle.toArticle() }
+        return TopHeadline(articleList, status, totalResults)
+    }
+}
 
-data class Article(
+data class ApiArticle(
     val author: String?,
     val content: String?,
     val description: String?,
     val publishedAt: String?,
-    val source: Source?,
     val title: String?,
     val url: String?,
     val urlToImage: String?
-)
-
-data class Source(
-    val id: String?,
-    val name: String?
-)
+) {
+    fun toArticle(): Article? {
+        if (title == null) return null
+        return Article(author, content, description, publishedAt, title, url, urlToImage)
+    }
+}
