@@ -1,7 +1,7 @@
 package com.rahul.newsdemo.ui.news.list
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import com.google.common.truth.Truth
+import com.google.common.truth.Truth.assertThat
 import com.rahul.newsdemo.data.local.Article
 import com.rahul.newsdemo.data.local.TopHeadline
 import com.rahul.newsdemo.data.repository.NewsRepository
@@ -64,14 +64,14 @@ class NewsListViewModelTest {
             getNewsHeadlines()
         )
         viewModel.fetchTopNewsHeadlines()
-        Truth.assertThat(viewModel.news.getOrAwaitValue()).hasSize(1)
+        assertThat(viewModel.news.getOrAwaitValue()).hasSize(1)
     }
 
     @Test
     fun fetchTopNewsHeadlines_failure() {
         coEvery { mockNewsRepository.getTopHeadlines(any()) } returns Result.Error("error")
         viewModel.fetchTopNewsHeadlines()
-        Truth.assertThat(viewModel.error.getOrAwaitValue().getContentIfNotHandled()?.message)
+        assertThat(viewModel.error.getOrAwaitValue().getContentIfNotHandled()?.message)
             .isEqualTo("error")
     }
 }
