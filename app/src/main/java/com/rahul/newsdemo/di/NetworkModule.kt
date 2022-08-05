@@ -1,6 +1,7 @@
 package com.rahul.newsdemo.di
 
 import com.rahul.newsdemo.BuildConfig
+import com.rahul.newsdemo.utils.RequestInterceptor
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -22,6 +23,7 @@ class NetworkModule {
     @Singleton
     fun providesOkHttp(): OkHttpClient = OkHttpClient().newBuilder()
         .addInterceptor(HttpLoggingInterceptor().setLevel(if (BuildConfig.DEBUG) HttpLoggingInterceptor.Level.BODY else HttpLoggingInterceptor.Level.NONE))
+        .addInterceptor(RequestInterceptor())
         .build()
 
     @Provides
