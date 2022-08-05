@@ -8,9 +8,14 @@ import java.util.*
 
 const val DATE_TIME_PATTERN_NEWS = "hh:mm a dd MMM yyyy"
 
-fun String.formatTime(): String {
-    val instant = Instant.parse(this)
-    return instant.toNewsListFormat()
+fun String.formatNewsTime(): String {
+    return try {
+        val instant = Instant.parse(this)
+        instant.toNewsListFormat()
+    } catch (e: Exception) {
+        e.printStackTrace()
+        ""
+    }
 }
 
 fun Instant.toNewsListFormat(): String {
@@ -25,5 +30,6 @@ fun ZonedDateTime.formatToString(pattern: String): String = format(pattern.dateT
 fun String.dateTimeFormatter(): DateTimeFormatter? = try {
     DateTimeFormatter.ofPattern(this, Locale.getDefault())
 } catch (e: Exception) {
+    e.printStackTrace()
     null
 }
