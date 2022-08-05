@@ -66,4 +66,12 @@ class NewsListViewModelTest {
         viewModel.fetchTopNewsHeadlines()
         Truth.assertThat(viewModel.news.getOrAwaitValue()).hasSize(1)
     }
+
+    @Test
+    fun fetchTopNewsHeadlines_failure() {
+        coEvery { mockNewsRepository.getTopHeadlines(any()) } returns Result.Error("error")
+        viewModel.fetchTopNewsHeadlines()
+        Truth.assertThat(viewModel.error.getOrAwaitValue().getContentIfNotHandled()?.message)
+            .isEqualTo("error")
+    }
 }
