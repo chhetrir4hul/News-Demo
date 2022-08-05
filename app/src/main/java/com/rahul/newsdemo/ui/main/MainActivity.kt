@@ -1,7 +1,8 @@
-package com.rahul.newsdemo
+package com.rahul.newsdemo.ui.main
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.rahul.newsdemo.R
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
