@@ -10,6 +10,8 @@ import com.rahul.newsdemo.databinding.ItemNewsBinding
 class NewsListAdapter : RecyclerView.Adapter<NewsListViewHolder>() {
     private var articleList: List<Article> = emptyList()
 
+    var onItemClicked: (Article) -> Unit = {}
+
     @SuppressLint("NotifyDataSetChanged")
     fun setArticleList(articleList: List<Article>) {
         this.articleList = articleList
@@ -26,6 +28,7 @@ class NewsListAdapter : RecyclerView.Adapter<NewsListViewHolder>() {
         val article = articleList[position]
         holder.bind(article)
         holder.itemView.setOnClickListener {
+            onItemClicked(articleList[position])
         }
     }
 
