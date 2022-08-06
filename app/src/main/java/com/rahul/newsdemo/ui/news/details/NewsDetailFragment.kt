@@ -10,6 +10,7 @@ import com.rahul.newsdemo.data.local.Article
 import com.rahul.newsdemo.databinding.FragmentNewsDetailsBinding
 import com.rahul.newsdemo.extensions.formatNewsTime
 import com.rahul.newsdemo.extensions.loadImage
+import com.rahul.newsdemo.ui.main.MainActivity
 
 class NewsDetailFragment : Fragment() {
 
@@ -33,11 +34,13 @@ class NewsDetailFragment : Fragment() {
 
         article = args.article
 
+        val activity = activity as MainActivity
+        activity.supportActionBar?.title = article?.title
+
         binding.ivImage.loadImage(article?.urlToImage)
         binding.tvTitle.text = article?.title ?: "-"
         binding.tvAuthor.text = article?.author ?: "-"
-        binding.tvPublishedDate.text =
-            article?.publishedAt?.formatNewsTime()
+        binding.tvPublishedDate.text = article?.publishedAt?.formatNewsTime()
         binding.tvContent.text = article?.content
     }
 }
